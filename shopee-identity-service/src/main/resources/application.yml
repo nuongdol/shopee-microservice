@@ -1,0 +1,70 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: shopee-identity
+  datasource:
+    url: jdbc:postgresql://localhost:5432/shopee_database
+    username: postgres
+    password: 12345678
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    timeout: 60000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: nuongdol03032008@gmail.com
+    password: uazhfzdzulgeuspa
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id:
+            client_secret:
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+jwt:
+  secret: 843567893696976453275974432697R634976R738467TR678T34865R6834R8763T478378637664538745673865783678548735687R3
+app:
+  oauth2:
+# After successfully authenticating with the OAuth2 Provider
+# we 'll be generating an auth token for the user and sending the token to the
+# redirectUri mentioned by the client in the oauth2/authorize request.
+# we' re not using cookies because they won't work well in mobile clients.
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth2/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
