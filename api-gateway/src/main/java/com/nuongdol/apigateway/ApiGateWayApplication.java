@@ -1,4 +1,4 @@
-package com.nuongdol.ApiGateWay;
+package com.nuongdol.apigateway;
 
 
 import org.springframework.boot.SpringApplication;
